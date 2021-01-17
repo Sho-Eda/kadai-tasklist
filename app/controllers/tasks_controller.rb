@@ -58,7 +58,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    flash[:success] = 'タスクを削除しました。'
+    flash[:success] = 'Taskを削除しました。'
     redirect_back(fallback_location: root_path)
     # set_task
     # @task.destroy
