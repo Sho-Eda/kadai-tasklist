@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   # TasksController の全アクションをログイン必須にする。
   before_action :require_user_logged_in
   # destroy アクションが実行される前に correct_user が実行される。
-  before_action :correct_user, only: [:destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
 
   def index
@@ -18,7 +18,7 @@ class TasksController < ApplicationController
   end
 
   def show
-      set_task
+      # set_task
   end
 
   def new
@@ -40,16 +40,16 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = current_user.tasks.build(task_params)
+    
     # @task = Task.find(params[:id])
+
   end
 
   def update
     set_task
-    
     if @task.update(task_params)
       flash[:success] = 'Task が正常に更新されました'
-      redirect_to @task
+      redirect_to root_url
     else
       flash.now[:danger] = 'Task が更新されませんでした'
       render :edit
