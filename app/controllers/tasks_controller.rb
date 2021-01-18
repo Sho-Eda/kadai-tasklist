@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  # before_action :set_task, only: [:show, :edit, :update, :destroy]
   # TasksController の全アクションをログイン必須にする。
   before_action :require_user_logged_in
   # destroy アクションが実行される前に correct_user が実行される。
@@ -17,9 +17,9 @@ class TasksController < ApplicationController
       
   end
 
-  def show
-      # set_task
-  end
+  # def show
+  #     # set_task
+  # end
 
   def new
       @task = Task.new
