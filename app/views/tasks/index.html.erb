@@ -1,4 +1,4 @@
-<% if logged_in? %>
+
 <div class="row">
     <aside class="col-sm-4">
       <%= render 'form', task: @task %>
@@ -8,14 +8,5 @@
       <%= render 'tasks/tasks', tasks: @tasks %>
     </div>
 
-<% else %>
 
-<!--ログイン前-->
-<div class="center jumbotron">
-    <div class="text-center">
-      <h1>Welcome to The Tasklist</h1>
-      <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %>
-    </div>
-  </div>
 
-<% end %>
