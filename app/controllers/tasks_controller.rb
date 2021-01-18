@@ -6,16 +6,10 @@ class TasksController < ApplicationController
 
 
   def index
-    if logged_in?
       @task = current_user.tasks.build  # form_with 用
       @tasks = current_user.tasks.order(id: :desc).page(params[:page]).per(5)
-    end
-    
   end
   
-  def new
-      @task = Task.new
-  end
 
   def create
     @task = current_user.tasks.build(task_params)
@@ -62,6 +56,7 @@ class TasksController < ApplicationController
   def correct_user
     # ログインユーザ (current_user) が持つ microposts 限定で検索する。
     @task = current_user.tasks.find_by(id: params[:id])
+    # @taskがnilだったら
     unless @task
       redirect_to root_url
     end
