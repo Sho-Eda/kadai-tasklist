@@ -6,8 +6,12 @@ class TasksController < ApplicationController
 
 
   def index
-      @task = current_user.tasks.build  # form_with 用
+      # @task = current_user.tasks.build  # form_with 用
       @tasks = current_user.tasks.order(id: :desc).page(params[:page]).per(5)
+  end
+  
+  def new
+    @task = Task.new
   end
   
 
