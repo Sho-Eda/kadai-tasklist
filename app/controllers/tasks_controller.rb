@@ -1,13 +1,17 @@
 class TasksController < ApplicationController
   # TasksController の全アクションをログイン必須にする。
   before_action :require_user_logged_in
-  # destroy アクションが実行される前に correct_user が実行される。
-  before_action :correct_user, only: [:edit, :update, :destroy]
+  # edit,update,destroy アクションが実行される前に correct_user が実行される。
+  before_action :correct_user, only: [:show, :edit, :update, :destroy]
 
 
   def index
       # @task = current_user.tasks.build  # form_with 用
       @tasks = current_user.tasks.order(id: :desc).page(params[:page]).per(5)
+  end
+  
+  def show
+     @task = Task.find(params[:id])
   end
   
   def new
@@ -29,7 +33,7 @@ class TasksController < ApplicationController
   end
 
   def edit
-
+     
   end
 
   def update
@@ -58,7 +62,8 @@ class TasksController < ApplicationController
   
   # 本当にログインユーザが所有しているものかを確認する。
   def correct_user
-    # ログインユーザ (current_user) が持つ microposts 限定で検索する。
+    # ログインユーザ (current_user) が持つ tasks 限定で検索する。
+    # current_user.tasksだけだったら今ログインしているユーザのタスク全て
     @task = current_user.tasks.find_by(id: params[:id])
     # @taskがnilだったら
     unless @task
