@@ -26,7 +26,7 @@ class TasksController < ApplicationController
       flash[:success] = 'Taskが正常に投稿されました'
       redirect_to root_url
     else
-      @tasks = current_user.tasks.order(id: :desc).page(params[:page])
+      # @tasks = current_user.tasks.order(id: :desc).page(params[:page])
       flash.now[:danger] = 'Taskが投稿されませんでした'
       render :new
     end
